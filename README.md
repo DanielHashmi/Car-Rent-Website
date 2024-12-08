@@ -72,3 +72,13 @@ car-rental-website/
 
 
 
+## There is no button to navigate to the other pages in the design so you can go to other page by going to the other via chrome search bar like this --> https://car-rent-website-steel.vercel.app/admin  <-- /admin
+
+
+## 📃 All Pages
+
+/admin
+/payment
+/details
+/category
+/  <-- this is the home page
