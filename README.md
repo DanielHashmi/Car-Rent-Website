@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Car Rental Website
 
-## Getting Started
+A modern, responsive car rental website built with **Next.js 15**, **TypeScript**, **Tailwind CSS**, and **global CSS**. This project showcases a user-friendly interface and design optimized for ease of use and performance.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Responsive Design**: Optimized for all devices, including desktops, tablets, and mobile phones.
+- **Modern UI/UX**: Sleek, clean, and user-friendly interface.
+- **Performance Optimized**: Built with the latest version of Next.js (v15) for fast performance and server-side rendering (SSR).
+- **Tailwind CSS Integration**: Flexible and utility-first CSS framework for efficient styling.
+- **TypeScript Support**: Provides type safety and improved developer experience.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔧 Technologies Used
 
-## Learn More
+- **Framework**: Next.js 15
+- **Styling**: Tailwind CSS & Global CSS
+- **Language**: TypeScript
+- **Hosting**: Vercel
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🌐 Live Demo
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Check out the live version of the website here: [Car Rental Website](https://car-rent-website-steel.vercel.app/)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛠️ Installation and Setup
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Follow these steps to set up the project locally:
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/DanielHashmi/Car-Rent-Website.git
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install --legacy-peer-deps
+   ```
+
+3. **Run the development server:**
+
+   ```bash
+   npm run dev
+   ```
+
+4. Open your browser and navigate to `http://localhost:3000` to view the website locally.
+
+---
+
+## 📁 Project Structure
+
+A quick overview of the project's folder structure:
+
+car-rental-website/
+├── public/         # Static assets like images and icons
+├── src/            # Source folder for all project code
+│   ├── app/        # Next.js App Router and pages
+│   ├── components/ # Reusable components
+│   ├── styles/     # Global CSS files
+│   ├── utils/      # Helper functions
+│   └── types/      # TypeScript type definitions
+├── tailwind.config.js  # Tailwind CSS configuration
+└── package.json    # Project dependencies and scripts
+
+
+
