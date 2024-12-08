@@ -77,9 +77,12 @@ car-rental-website/
 
 
 ## 📃 All Pages
-
+```
 /admin
 /payment
 /details
 /category
 /  <-- this is the home page
+```
+
+Good Luck 💖 ( It's 1:43 AM  )
