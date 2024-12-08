@@ -59,6 +59,7 @@ Follow these steps to set up the project locally:
 
 A quick overview of the project's folder structure:
 
+```
 car-rental-website/
 ├── public/         # Static assets like images and icons
 ├── src/            # Source folder for all project code
@@ -69,7 +70,7 @@ car-rental-website/
 │   └── types/      # TypeScript type definitions
 ├── tailwind.config.js  # Tailwind CSS configuration
 └── package.json    # Project dependencies and scripts
-
+```
 
 
 ## There is no button to navigate to the other pages in the design so you can go to other page by going to the other via chrome search bar like this --> https://car-rent-website-steel.vercel.app/admin  <-- /admin
