@@ -14,7 +14,7 @@ const Footer = () => {
                     <div className="lg:w-1/2 flex gap-20 flex-wrap lg:flex-nowrap lg:justify-between">
                         <FooterCard bold={false} input={false} links={['How it works', 'Featured', 'Partnership', 'Business Relation']} title="About" />
                         <FooterCard bold={false} input={false} links={['Events', 'Blogs', 'Podcast', 'Invite a friend']} title="Community" />
-                        <FooterCard bold={false} input={false} links={['Discord', 'Instagram', 'Twitter', 'Facebook']} title="Socials" />
+                        <FooterCard bold={false} input={false} links={['Admin', 'Category', 'Details', 'Payment']} title="Quick Navigate" />
                     </div>
                 </div>
 

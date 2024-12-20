@@ -196,7 +196,7 @@ const Payment = () => {
                             <div className="font-bold">Confirmation</div>
                             <div className="text-[#596780] text-xs flex justify-between">
                                 <div className="text-[#596780] opacity-50 text-xs">We are getting to the end. Just few clicks and your rental is ready!</div>
-                                <div>Step 4 of 4</div>
+                                <div className="text-nowrap">Step 4 of 4</div>
                             </div>
                         </div>
 

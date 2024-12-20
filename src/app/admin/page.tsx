@@ -302,7 +302,7 @@ const Category = () => {
                                 <Image className="w-28 h-14 object-contain rounded-lg" src={'/nisan.png'} alt="car-img" width={100} height={100} />
                                 <div className="relative flex flex-col w-full" >
                                     <div className="text-xl font-bold flex items-center justify-between">
-                                        <div>Nissan GT - R</div>
+                                        <div className="text-base sm:text-xl">Nissan GT - R</div>
                                         <div>
                                             <div className="font-thin text-xs opacity-50">20 July</div>
                                             <div className="font-bold text-sm">$80.00</div>
@@ -317,7 +317,7 @@ const Category = () => {
                                 <Image className="w-28 h-14 object-contain rounded-lg" src={'/deep.png'} alt="car-img" width={100} height={100} />
                                 <div className="relative flex flex-col w-full" >
                                     <div className="text-xl font-bold flex items-center justify-between">
-                                        <div>Nissan GT - R</div>
+                                        <div className="text-base sm:text-xl">Nissan GT - R</div>
                                         <div>
                                             <div className="font-thin text-xs opacity-50">20 July</div>
                                             <div className="font-bold text-sm">$80.00</div>
@@ -332,7 +332,7 @@ const Category = () => {
                                 <Image className="w-28 h-14 object-contain rounded-lg" src={'/rollsroyce.png'} alt="car-img" width={100} height={100} />
                                 <div className="relative flex flex-col w-full" >
                                     <div className="text-xl font-bold flex items-center justify-between">
-                                        <div>Nissan GT - R</div>
+                                        <div className="text-base sm:text-xl">Nissan GT - R</div>
                                         <div>
                                             <div className="font-thin text-xs opacity-50">20 July</div>
                                             <div className="font-bold text-sm">$80.00</div>
@@ -347,7 +347,7 @@ const Category = () => {
                                 <Image className="w-28 h-14 object-contain rounded-lg" src={'/jeep.png'} alt="car-img" width={100} height={100} />
                                 <div className="relative flex flex-col w-full" >
                                     <div className="text-xl font-bold flex items-center justify-between">
-                                        <div>Nissan GT - R</div>
+                                        <div className="text-base sm:text-xl">Nissan GT - R</div>
                                         <div>
                                             <div className="font-thin text-xs opacity-50">20 July</div>
                                             <div className="font-bold text-sm">$80.00</div>

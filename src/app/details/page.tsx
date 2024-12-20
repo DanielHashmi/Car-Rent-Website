@@ -158,7 +158,7 @@ const Category = () => {
                         </div>
                     </div>
                     <div className="h-full">
-                        <div className="font-bold flex h-full justify-between bg-background flex-col gap-6 rounded-lg p-6 min-h-[28.8rem]">
+                        <div className="font-bold flex h-full justify-between bg-background flex-col gap-6 rounded-lg py-6 pl-1 sm:p-6 min-h-[28.8rem]">
                             <div className="relative flex flex-col gap-2" >
                                 <div className="text-xl">Nissan GT - R</div>
                                 <div className='text-xs opacity-50 flex gap-2'>

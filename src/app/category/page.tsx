@@ -110,7 +110,7 @@ const Category = () => {
 
 
                 <div className="flex justify-start 2xl:justify-center overflow-hidden">
-                    <div className="flex gap-8 py-6  max-w-[1308px] flex-wrap">
+                    <div className="flex gap-8 py-6  flex-wrap">
                         {carDetails.map((obj, key) => (
                             <Card key={key} data={{
                                 cardType: 'mobile-now',
