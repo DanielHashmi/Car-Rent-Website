@@ -1,45 +1,23 @@
-
 import Button from "@/components/Button"
 import Card from "@/components/Card"
 import Header from "@/components/Header"
 import IconButton from "@/components/Navbar/IconButton"
-import { CARCARD } from "@/types/types"
+import buildImg from "@/sanity/buildImg";
+import { client } from "@/sanity/client";
+import { CarDetailsQuery, CardQuery } from "@/sanity/grok";
+import { CARCARD, DETAILPAGE } from "@/types/types";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/image"
+import Link from "next/link";
 
+export async function generateStaticParams() {
+    const slugs_objs: { slug: { current: string } }[] = await client.fetch("*[_type == 'detail_page']{slug{current}}");
+    return slugs_objs.map((obj) => ({ slug: [obj.slug.current] }))
+};
 
-const carDetails: CARCARD[] = [
-    {
-        name: 'Sportage',
-        currPrice: '$99.00/',
-        oldPrice: '$200.00/',
-        cardType: 'mobile',
-        image: '/jeep.png',
-        heart: false,
-        carType: 'Hatchback',
-        icons: true,
-    },
-    {
-        name: 'Rolls- Royce',
-        currPrice: '$99.00/',
-        oldPrice: '$200.00/',
-        cardType: 'mobile',
-        image: '/rollsroyce.png',
-        heart: true,
-        carType: 'Sedan',
-        icons: true,
-    },
-    {
-        name: 'Koenigsegg',
-        currPrice: '$99.00/',
-        image: '/car2.svg',
-        carType: 'Manual',
-        heart: false,
-        icons: true,
-        oldPrice: '$200.00/',
-        cardType: 'mobile',
-    }
-]
-const Category = () => {
+const Category = async ({ params }: { params: Promise<{ slug: string }> }) => {
+    const carDetails: CARCARD[] = await client.fetch(CardQuery);
+    const details: DETAILPAGE = (await client.fetch(CarDetailsQuery((await params).slug)))[0];
     return (
         <div className="flex justify-between ">
             <div className="min-w-72 border-t hidden xl:flex flex-col p-6 gap-6">
@@ -101,7 +79,7 @@ const Category = () => {
 
                 <div className="flex items-start gap-6 flex-col lg:flex-row">
                     <div className="gap-6 flex flex-col w-full">
-                        <div className={`relative bg-blue-600 text-white p-6 md:p-8 rounded-lg min-h-[20rem]`}>
+                        <div className={`relative text-white p-6 md:p-8 rounded-lg min-h-[20rem]`}>
                             {/* Content Section */}
                             <div className="relative z-10 flex flex-col gap-6 md:max-w-lg">
                                 <h1 className="text-2xl sm:text-4xl leading-tight max-w-sm">
@@ -115,9 +93,9 @@ const Category = () => {
 
                             {/* Car Image */}
                             <Image
-                                src="/othercar.png"
+                                src={buildImg(details.image as SanityImageSource).width(400).url()}
                                 alt="Car Rental"
-                                className="object-contain object-bottom"
+                                className="object-cover object-left"
                                 fill
                             />
                         </div>
@@ -126,9 +104,9 @@ const Category = () => {
                                 <div className={`bg-blue-600 rounded-lg size-full relative`}>
                                     {/* Car Image */}
                                     <Image
-                                        src="/othercar.png"
+                                        src={buildImg(details.image as SanityImageSource).width(400).url()}
                                         alt="Car Rental"
-                                        className="object-contain size-40 object-top"
+                                        className="object-contain w-40 h-full object-top"
                                         width={200}
                                         height={200}
 
@@ -157,40 +135,42 @@ const Category = () => {
 
                         </div>
                     </div>
-                    <div className="h-full">
-                        <div className="font-bold flex h-full justify-between bg-background flex-col gap-6 rounded-lg py-6 pl-1 sm:p-6 min-h-[28.8rem]">
+                    <div className="size-full">
+                        <div className="font-bold flex h-full justify-between bg-background flex-col gap-6 rounded-lg py-6 pl-1 sm:py-6 min-h-[28.8rem]">
                             <div className="relative flex flex-col gap-2" >
-                                <div className="text-xl">Nissan GT - R</div>
+                                <div className="text-xl">{details.name}</div>
                                 <div className='text-xs opacity-50 flex gap-2'>
                                     <Image className="w-20" src={'/stars.png'} alt="stars-icon" width={100} height={100} />
-                                    440+ Reviewer
+                                    {details.reviews}+ Reviewer
                                 </div>
 
                                 <div className="absolute right-0 flex flex-col gap-2 top-0">
                                     <Image className="size-5 rounded-full bg-background" src={'/heart.svg'} alt="heart-icon" width={100} height={100} />
                                 </div>
                             </div>
-                            <p className="opacity-50 font-thin">
-                                NISMO has become the embodiment of Nissans outstanding performance, inspired by the most unforgiving proving ground, the race track.
+                            <p className="opacity-50 font-thin md:max-w-[519px] min-w-[35vw]">
+                                {details.desc}
                             </p>
                             <div className="opacity-50 gap-4 font-thin flex flex-wrap mt-2">
                                 <span>Type Car</span>
-                                <span className="font-bold">Sport</span>
+                                <span className="font-bold">{details.car_type}</span>
                                 <span>Capacity</span>
-                                <span className="font-bold">2 Person</span>
+                                <span className="font-bold">{details.capacity}</span>
                                 <span>Steering</span>
-                                <span className="font-bold">Manual</span>
+                                <span className="font-bold">{details.steering}</span>
                                 <span>Gasoline</span>
-                                <span className="font-bold">70L</span>
+                                <span className="font-bold">{details.gasoline}</span>
                             </div>
 
 
                             <div className='flex justify-between mt-6'>
                                 <div className='flex flex-col'>
-                                    <span className="text-2xl">$80.00/  <span className='text-sm opacity-50'>day</span></span>
-                                    <span className="opacity-50 line-through">$100.00 <span className='text-sm opacity-50'>day</span></span>
+                                    <span className="text-2xl">{details.current_price}/  <span className='text-sm opacity-50'>day</span></span>
+                                    <span className="opacity-50 line-through">{details.old_price} <span className='text-sm opacity-50'>day</span></span>
                                 </div>
-                                <Button text='Rent Now' classes='bg-blue-600' />
+                                <Link href={`/payment/${details.slug.current}`}>
+                                    <Button text='Rent Now' classes='bg-blue-600' />
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -199,7 +179,7 @@ const Category = () => {
                 <div className="bg-background my-6 p-6 flex flex-col gap-6 rounded-lg">
                     <div className="flex gap-3 items-center ">
                         <div className="font-bold">Reviews</div>
-                        <div className="py-1 text-sm px-3 text-white bg-blue-600 rounded-md">13</div>
+                        <div className="py-1 text-sm px-3 text-white bg-blue-600 rounded-md">{details.reviews}</div>
                     </div>
 
                     <div>
@@ -251,14 +231,15 @@ const Category = () => {
 
                         {carDetails.map((obj, key) => (
                             <Card key={key} data={{
-                                cardType: 'mobile-now',
+                                card_type: 'mobile-now',
                                 name: obj.name,
-                                currPrice: obj.currPrice,
+                                current_price: obj.current_price,
                                 image: obj.image,
-                                carType: obj.carType,
+                                car_type: obj.car_type,
                                 heart: obj.heart,
                                 icons: obj.icons,
-                                oldPrice: obj.oldPrice,
+                                old_price: obj.old_price,
+                                slug: obj.slug
                             }} />
                         ))}
 
@@ -270,14 +251,15 @@ const Category = () => {
 
                         {carDetails.map((obj, key) => (
                             <Card key={key} data={{
-                                cardType: 'mobile-now',
+                                card_type: 'mobile-now',
                                 name: obj.name,
-                                currPrice: obj.currPrice,
+                                current_price: obj.current_price,
                                 image: obj.image,
-                                carType: obj.carType,
+                                car_type: obj.car_type,
                                 heart: obj.heart,
                                 icons: obj.icons,
-                                oldPrice: obj.oldPrice,
+                                old_price: obj.old_price,
+                                slug: obj.slug
                             }} />
                         ))}
 

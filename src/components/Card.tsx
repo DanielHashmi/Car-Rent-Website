@@ -1,58 +1,81 @@
-
 import { CARCARD } from '@/types/types'
 import Image from 'next/image'
 import Button from './Button'
+import buildImg from '@/sanity/buildImg'
+import { SanityImageSource } from '@sanity/image-url/lib/types/types'
+import Link from 'next/link'
 
 const Card = ({ data }: { data: CARCARD }) => {
-    return data.cardType === 'mobile' ? (
-        <div className="font-bold flex bg-background flex-col h-[388px] w-[304px] gap-3 rounded-lg p-6">
-            <div className="relative size-full" >
-                <div>{data.name}</div>
-                <div className='text-xs opacity-50'>{data.carType}</div>
-                <Image className="object-contain" src={data.image} alt="Controller-Image" fill />
+    return data.card_type === 'mobile' ? (
+        <div className="font-bold flex flex-col h-[388px] min-w-[304px] gap-3 rounded-lg p-6 bg-white relative">
+            <div className="flex flex-col items-start bg-white rounded-lg mb-2">
+                <div className="text-lg">{data.name}</div>
+                <div className='text-xs opacity-30'>{data.car_type}</div>
+            </div>
+            <div className="absolute right-2 top-2">
+                <Image className="w-8 h-8 rounded-full bg-white p-1" src={data.heart ? '/heart.svg' : '/heartBorder.svg'} alt="heart-icon" width={32} height={32} />
+            </div>
+            <div className="relative h-48 mb-4">
+                <Image className="object-contain h-full w-full rounded-2xl min-h-32" src={buildImg(data.image as SanityImageSource).width(300).url()} alt="Controller-Image" layout="fill" />
 
-                <div className="absolute right-0 flex flex-col gap-2 top-0">
-                    <Image className="size-5 rounded-full bg-background" src={data.heart ? '/heart.svg' : '/heartBorder.svg'} alt="heart-icon" width={100} height={100} />
+            </div>
+
+            <div className='flex justify-between items-center mt-2'>
+                <div className="flex items-center">
+                    <Image className="w-12 mr-2" src={'/gasoline.svg'} alt="gasoline-icon" width={24} height={24} />
+                </div>
+                <div className="flex items-center">
+                    <Image className="w-14 mr-2" src={'/manual.svg'} alt="engine-icon" width={24} height={24} />
+                </div>
+                <div className="flex items-center">
+                    <Image className="w-14 mr-2" src={'/people.svg'} alt="people-icon" width={24} height={24} />
                 </div>
             </div>
-
-            <div className='flex justify-between items-center'>
-                <Image className="size-14" src={'/gasoline.svg'} alt="gasoline-icon" width={100} height={100} />
-                <Image className="size-20" src={'/manual.svg'} alt="engine-icon" width={100} height={100} />
-                <Image className="size-20" src={'/people.svg'} alt="people-icon" width={100} height={100} />
-            </div>
-            <div className='flex justify-between'>
+            <div className='flex justify-between items-center mt-2'>
                 <div className='flex flex-col'>
-                    <span className="text-xl">{data.currPrice} <span className='text-sm opacity-50'>day</span></span>
-                    <span className="text-xs opacity-50 line-through">{data.oldPrice} <span className='text-sm opacity-50'>day</span></span>
+                    <span className="text-xl">{data.current_price} <span className='text-sm opacity-70'>/ day</span></span>
+                    <span className="text-xs opacity-30 line-through">{data.old_price} <span className='text-sm opacity-70'>/ day</span></span>
                 </div>
-                <Button text='Rent Now' classes='bg-blue-600' />
+                <Link href={`/details/${data.slug?.current}`}>
+                    <Button text='Rent Now' classes='bg-blue-600 text-white py-2 px-4 rounded-md' />
+                </Link>
             </div>
         </div>
-    ) : <div className="font-bold flex bg-background relative flex-col h-[250px] sm:h-[388px] w-full sm:w-[304px] gap-3 rounded-lg p-6">
-        <div className="sm:relative size-full" >
-            <div>{data.name}</div>
-            <div className='text-xs opacity-50'>{data.carType}</div>
-            <Image className="object-contain pr-32 sm:p-0 pl-16" src={data.image} alt="Image" fill />
+    ) : (
+        <div className="font-bold flex flex-col sm:h-[388px] w-full sm:w-[304px] gap-3 rounded-lg p-6 bg-white relative">
+            <div className="flex flex-col items-start bg-white rounded-lg mb-2">
+                <div className="text-lg">{data.name}</div>
+                <div className='text-xs opacity-30'>{data.car_type}</div>
+            </div>
+            <div className="relative h-48 sm:h-64 mb-4">
+                <Image className="object-contain h-full w-full rounded-2xl min-h-32" src={buildImg(data.image as SanityImageSource).width(300).url()} alt="Image" layout="fill" />
+            </div>
+            <div className="absolute right-2 top-2">
+                <Image className="w-8 h-8 rounded-full bg-white p-1" src={data.heart ? '/heart.svg' : '/heartBorder.svg'} alt="heart-icon" width={32} height={32} />
+            </div>
 
-            <div className="absolute right-6 flex flex-col gap-2 top-6 sm:top-0 sm:right-0">
-                <Image className="size-5 rounded-full bg-background" src={data.heart ? '/heart.svg' : '/heartBorder.svg'} alt="heart-icon" width={100} height={100} />
+            <div className='flex justify-between items-center mt-2'>
+                <div className="flex items-center">
+                    <Image className="w-14 mr-2" src={'/gasoline.svg'} alt="gasoline-icon" width={24} height={24} />
+                </div>
+                <div className="flex items-center">
+                    <Image className="w-14 mr-2" src={'/manual.svg'} alt="engine-icon" width={24} height={24} />
+                </div>
+                <div className="flex items-center">
+                    <Image className="w-14 mr-2" src={'/people.svg'} alt="people-icon" width={24} height={24} />
+                </div>
+            </div>
+            <div className='flex justify-between items-center mt-2'>
+                <div className='flex flex-col'>
+                    <span className="text-xl">{data.current_price} <span className='text-sm opacity-70'>/ day</span></span>
+                    <span className="text-xs opacity-30 line-through">{data.old_price} <span className='text-sm opacity-70'>/ day</span></span>
+                </div>
+                <Link href={`/details/${data.slug?.current}`}>
+                    <Button text='Rent Now' classes='bg-blue-600 text-white py-2 px-4 rounded-md' />
+                </Link>
             </div>
         </div>
-
-        <div className='flex justify-between items-start gap-2 sm:gap-0 sm:items-center absolute sm:relative right-6 top-16 sm:top-0 sm:right-0 flex-col sm:flex-row'>
-            <Image className="w-10 h-fit sm:size-14" src={'/gasoline.svg'} alt="gasoline-icon" width={100} height={100} />
-            <Image className="w-14 h-fit sm:size-20" src={'/manual.svg'} alt="engine-icon" width={100} height={100} />
-            <Image className="w-14 h-fit sm:size-20" src={'/people.svg'} alt="people-icon" width={100} height={100} />
-        </div>
-        <div className='flex justify-between'>
-            <div className='flex flex-col'>
-                <span className="text-xl">{data.currPrice} <span className='text-sm opacity-50'>day</span></span>
-                <span className="text-xs opacity-50 line-through">{data.oldPrice} <span className='text-sm opacity-50'>day</span></span>
-            </div>
-            <Button text='Rent Now' classes='bg-blue-600' />
-        </div>
-    </div>
+    );
 }
 
 export default Card

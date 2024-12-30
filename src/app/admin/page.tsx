@@ -182,7 +182,7 @@ const Category = () => {
 
 
 
-                            <div className="bg-white p-6 rounded-xl  flex lg:hidden flex-col gap-6">
+                            <div className="bg-white sm:p-6 py-6 rounded-xl  flex lg:hidden flex-col gap-6">
 
                                 <div className="flex items-center mb-2">
                                     <span className="flex justify-center items-center border border-white size-3 rounded-full bg-blue-500 mr-2">

@@ -4,51 +4,12 @@ import CarCard from "./CarCard"
 import LocationSelector from "./LocationSelector"
 import Header from "../Header"
 import Button from "../Button"
+import { client } from "@/sanity/client"
+import { CardQuery } from "@/sanity/grok"
+import Link from "next/link"
 
-
-const carDetails: CARCARD[] = [
-    {
-        name: 'Nissan',
-        currPrice: '$99.00/',
-        oldPrice: '$200.00/',
-        cardType: 'mobile',
-        image: '/nisan.png',
-        heart: true,
-        carType: 'Sport',
-        icons: true,
-    },
-    {
-        name: 'Sportage',
-        currPrice: '$99.00/',
-        oldPrice: '$200.00/',
-        cardType: 'mobile',
-        image: '/jeep.png',
-        heart: false,
-        carType: 'Hatchback',
-        icons: true,
-    },
-    {
-        name: 'Rolls- Royce',
-        currPrice: '$99.00/',
-        oldPrice: '$200.00/',
-        cardType: 'mobile',
-        image: '/rollsroyce.png',
-        heart: true,
-        carType: 'Sedan',
-        icons: true,
-    },
-    {
-        name: 'Koenigsegg',
-        currPrice: '$99.00/',
-        image: '/car2.svg',
-        carType: 'Manual',
-        heart: false,
-        icons: true,
-        oldPrice: '$200.00/',
-        cardType: 'mobile',
-    }
-]
-const FrontLanding = () => {
+const FrontLanding = async () => {
+    const carDetails: CARCARD[] = await client.fetch(CardQuery);
     return (
         <div className="md:px-16 px-6 py-8 bg-[#f6f7f9]">
             <div className="flex gap-6 justify-center">
@@ -65,22 +26,23 @@ const FrontLanding = () => {
                     className="hidden lg:flex bg-blue-500" />
             </div>
 
-            <LocationSelector currentPage="home"/>
+            <LocationSelector currentPage="home" />
             <Header showViewAll text="Popular Car" />
 
 
             <div className="flex justify-start 2xl:justify-center mt-12 overflow-hidden">
-                <div className="flex gap-8 py-6 2xl:justify-between xl:w-[82rem]">
+                <div className="flex gap-8 py-6  xl:w-[82rem] overflow-x-scroll">
                     {carDetails.map((obj, key) => (
                         <Card key={key} data={{
-                            cardType: 'mobile',
+                            card_type: 'mobile',
                             name: obj.name,
-                            currPrice: obj.currPrice,
+                            current_price: obj.current_price,
                             image: obj.image,
-                            carType: obj.carType,
+                            car_type: obj.car_type,
                             heart: obj.heart,
                             icons: obj.icons,
-                            oldPrice: obj.oldPrice,
+                            old_price: obj.old_price,
+                            slug: obj.slug
                         }} />
                     ))}
                 </div>
@@ -88,29 +50,31 @@ const FrontLanding = () => {
             <Header showViewAll={false} text="Recommendation Car" />
 
             <div className="flex justify-start 2xl:justify-center mt-12 overflow-hidden">
-                <div className="flex gap-8 py-6 2xl:justify-between xl:w-[82rem] flex-wrap">
+                <div className="flex gap-8 py-6 xl:w-[82rem] flex-wrap">
                     {carDetails.map((obj, key) => (
                         <Card key={key} data={{
-                            cardType: '',
+                            card_type: '',
                             name: obj.name,
-                            currPrice: obj.currPrice,
+                            current_price: obj.current_price,
                             image: obj.image,
-                            carType: obj.carType,
+                            car_type: obj.car_type,
                             heart: obj.heart,
                             icons: obj.icons,
-                            oldPrice: obj.oldPrice,
+                            old_price: obj.old_price,
+                            slug: obj.slug
                         }} />
                     ))}
                     {carDetails.map((obj, key) => (
                         <Card key={key} data={{
-                            cardType: '',
+                            card_type: '',
                             name: obj.name,
-                            currPrice: obj.currPrice,
+                            current_price: obj.current_price,
                             image: obj.image,
-                            carType: obj.carType,
+                            car_type: obj.car_type,
                             heart: obj.heart,
                             icons: obj.icons,
-                            oldPrice: obj.oldPrice,
+                            old_price: obj.old_price,
+                            slug: obj.slug
                         }} />
                     ))}
                 </div>
@@ -119,7 +83,9 @@ const FrontLanding = () => {
 
             <div className="flex justify-center mt-12">
                 <div className="flex w-full justify-center relative xl:w-[82rem]">
-                    <Button text='Show more car' classes='bg-blue-600' />
+                    <Link href={'/category'}>
+                        <Button text='Show more car' classes='bg-blue-600' />
+                    </Link>
                     <div className="text-sm opacity-50 absolute right-0">120 cars</div>
                 </div>
             </div>

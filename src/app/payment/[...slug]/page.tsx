@@ -1,7 +1,14 @@
 import Button from "@/components/Button"
+import buildImg from "@/sanity/buildImg";
+import { client } from "@/sanity/client";
+import { CarDetailsQuery } from "@/sanity/grok";
+import { DETAILPAGE } from "@/types/types";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/image"
 
-const Payment = () => {
+const Payment = async ({ params }: { params: Promise<{ slug: string }> }) => {
+    const details: DETAILPAGE = (await client.fetch(CarDetailsQuery((await params).slug)))[0];
+
     return (
         <div className="flex justify-center bg-[#f6f7f9] py-6">
             <div className="w-[95vw] flex gap-6 flex-col-reverse lg:flex-row">
@@ -236,19 +243,19 @@ const Payment = () => {
                     </div>
 
                     <div className="flex gap-4 items-center">
-                        <Image className="size-28" src={'/bgwithcar.png'} alt="car-img" width={100} height={100} />
+                        <Image className="size-28 object-contain rounded-xl" src={buildImg(details.image as SanityImageSource).width(400).url()} alt="car-img" width={100} height={100} />
                         <div className="relative flex flex-col gap-2" >
-                            <div className="text-2xl font-bold">Nissan GT - R</div>
+                            <div className="text-2xl font-bold">{details.name}</div>
                             <div className='text-xs opacity-50 flex gap-2'>
                                 <Image className="w-20" src={'/stars.png'} alt="stars-icon" width={100} height={100} />
-                                440+ Reviewer
+                                {details.reviews}+ Reviewer
                             </div>
                         </div>
                     </div>
 
                     <div className="flex justify-between text-sm text-[#596780]">
                         <div className="text-[#596780] opacity-50">Subtotel</div>
-                        <div className="font-bold">$80.00</div>
+                        <div className="font-bold">{details.current_price}</div>
                     </div>
                     <div className="flex justify-between text-sm text-[#596780]">
                         <div className="text-[#596780] opacity-50">Tax</div>
@@ -265,7 +272,7 @@ const Payment = () => {
                         <div className="font-bold">Total Rental Price</div>
                         <div className="flex items-end justify-between">
                             <div className="text-[#596780] opacity-50 text-xs">Overall price and includes rental discount</div>
-                            <div className="font-bold text-3xl">$80.00</div>
+                            <div className="font-bold text-3xl">{details.current_price}</div>
                         </div>
                     </div>
                 </div>
