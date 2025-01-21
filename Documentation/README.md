@@ -69,7 +69,7 @@ The platform focuses on providing a seamless user experience and implements effi
 ## Testing & Quality Assurance
 
 **Test Cases**: Comprehensive tests were conducted to ensure functionality, UI consistency, and API error handling.  
-View the detailed test cases in [Test Cases CSV](test_cases.csv).
+View the detailed test cases in [Test Cases CSV](Testing Reports.csv).
 
 ### Sample Test Case:
 | Test Case ID | Description                            | Status  | Severity |
